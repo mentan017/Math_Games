@@ -27,10 +27,10 @@ router.get('/', function(req, res){
     res.status(308).redirect('/auth/login');
 });
 router.get('/login', function(req, res){
-    res.status(200).sendFile(`${homeDirectory}/Client/Auth/Login/index.html`);
+    res.status(200).sendFile(`${homeDirectory}/client/Auth/Login/index.html`);
 });
 router.get('/signup', function(req, res){
-    res.status(200).sendFile(`${homeDirectory}/Client/Auth/Signup/index.html`);
+    res.status(200).sendFile(`${homeDirectory}/client/Auth/Signup/index.html`);
 });
 router.get('/logout', function(req, res){
     try{
@@ -54,7 +54,7 @@ router.get('/verify/:token', async function(req, res){
                 });
                 await cookie.save();
                 //Send response
-                res.status(200).cookie("SID", cookie.UUID).sendFile(`${homeDirectory}/Client/Auth/Verify/success.html`);
+                res.status(200).cookie("SID", cookie.UUID).sendFile(`${homeDirectory}/client/Auth/Verify/success.html`);
                 //Update the user
                 var user = await UserModel.findById(activationToken.UserID);
                 user.Activated = true;
@@ -63,7 +63,7 @@ router.get('/verify/:token', async function(req, res){
                 await user.save();
             }else{
                 //The token has expired or doesn't exist
-                res.status(400).sendFile(`${homeDirectory}/Client/Auth/Verify/failure.html`);
+                res.status(400).sendFile(`${homeDirectory}/client/Auth/Verify/failure.html`);
             }
         }else{
             res.sendStatus(400);
