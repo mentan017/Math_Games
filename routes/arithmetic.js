@@ -22,8 +22,7 @@ router.get('/', function(req, res){
     res.status(308).redirect('/');
 });
 router.get('/multiplication', function(req, res){
-    
-    res.sendStatus(200);
+    res.status(200).sendFile(`${homeDirectory}/client/multiplication/index.html`);
 });
 
 function randomInt(min, max){
