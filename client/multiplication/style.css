@@ -90,10 +90,35 @@ h1{
     background-color: #5e000c;
     border-bottom: none;
 }
-#game-container > div:nth-child(2){
-    border: solid 1px #404040;
+#game-container > div:not(.playing){
+    display: grid;
+    align-items: center;
+    justify-content: center;
 }
-#game-container > div:not(.difficulty){
+#start-btn{
+    font-family: Orbiton, sans-serif;
+    background-color: #198754;
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+}
+.countdown{
+    font-size: 4rem;
+}
+.finish-screen{
+    font-family: Orbiton, sans-serif;
+    font-size: 2rem;
+}
+.finish-screen > p{
+    padding: 0.3rem 0;
+}
+#play-again-btn{
+    font-size: 1.2rem;
+    color: #0488d4;
+    cursor: pointer;
+}
+#game-container > div.playing{
+    border: solid 1px #404040;
     display: grid;
     grid-template-rows: 1fr 4.2rem;
     text-align: end;
