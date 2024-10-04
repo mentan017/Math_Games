@@ -1,16 +1,32 @@
 var timerInterval;
 var solved = 0;
+var mode = 0;
 
 document.getElementById("start-btn").addEventListener("click", StartGame);
+document.getElementById("start-btn").addEventListener("keyup", function(e){
+    if(e.keyCode == 13) StartGame();
+});
+document.getElementById("mode-easy").addEventListener("click", function(e){mode = 0; RemoveActiveDifficulty(); this.classList.add("active");});
+document.getElementById("mode-medium").addEventListener("click", function(e){mode = 1; RemoveActiveDifficulty(); this.classList.add("active");});
+document.getElementById("mode-hard").addEventListener("click", function(e){mode = 2; RemoveActiveDifficulty(); this.classList.add("active");});
+
+function RemoveActiveDifficulty(){
+    var difficulties = document.getElementsByClassName("difficulty");
+    for(var i=0; i<difficulties.length; i++){
+        difficulties[i].classList.remove("active");
+    }
+}
 
 function DisplayStart(){
     document.getElementById("question-super-container").innerHTML = `
-    <div id="start-btn">Start <span style="font-size: 1.6rem;">&#9654;</span></div>`;
+    <div id="start-btn" tabindex="1">Start <span style="font-size: 1.6rem;">&#9654;</span></div>`;
     document.getElementById("start-btn").addEventListener("click", StartGame);
+    document.getElementById("start-btn").addEventListener("keyup", function(e){
+        if(e.keyCode == 13) StartGame();
+    });
 }
 
 function StartGame(){
-    console.log("test");
     if(timerInterval){
         clearInterval(timerInterval);
         solved = 0;
@@ -36,19 +52,24 @@ function StartCountdown(num){
         <div id="solution-container">
             <input type="text" placeholder="000000" id="user-solution">
         </div>`;
+        
         document.getElementById("question-super-container").classList.add("playing");
         GetMultiplication(0);
         timerInterval = setInterval(UpdateTimer, 67, (new Date).getTime());
+        document.getElementById("user-solution").focus();
         document.getElementById("user-solution").addEventListener("keyup", CheckSolution);
     }
 }
 
-function GetMultiplication(mode){
-    var min = 10;
-    var max = 20;
+function GetMultiplication(){
+    var min = 5;
+    var max = 15;
     if(mode == 1){
-        min = 20;
-        max = 50;
+        min = 10;
+        max = 20;
+    }else if(mode == 2){
+        min = 15;
+        max = 30;
     }
     var val1 = Math.floor(Math.random()*(max-min+1)+min);
     var val2 = Math.floor(Math.random()*(max-min+1)+min);
@@ -72,11 +93,14 @@ function CheckSolution(){
             document.getElementById("question-super-container").innerHTML = `
             <div class="finish-screen">
                 <p>Congrats! You time is<br><span style="color: #aca916; line-height: 4rem;">${document.getElementById("timer").innerText}</span></p>
-                <p id="play-again-btn">Play again &#8634;</p>
+                <p id="play-again-btn" tabindex="1">Play again &#8634;</p>
             </div>`;
             document.getElementById("play-again-btn").addEventListener("click", DisplayStart);
+            document.getElementById("play-again-btn").addEventListener("keyup", function(e){
+                if(e.keyCode == 13) DisplayStart();
+            });
         }else{
-            GetMultiplication(0);
+            GetMultiplication();
             document.getElementById("user-solution").value = "";    
         }
     }

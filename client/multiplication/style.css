@@ -55,21 +55,25 @@ h1{
     grid-template-columns: max-content 1fr;
     column-gap: 30px;
 }
-.difficulty{
+.difficulties{
     font-family: "Orbiton", sans-serif;
     border: 1px solid #404040;
     font-size: 2rem;
 }
-.difficulty > p, .difficulty > div{
+.difficulties > p, .difficulties > div{
     padding: 1.2rem 2rem 1rem 2rem;
     background-color: rgba(50, 50, 50, 0.5);
     border-bottom: 1px solid #404040;
 }
-.difficulty > div{
+.difficulties > div{
     cursor: pointer;
 }
 .easy{
     color: #205124;
+}
+.easy.active{
+    color: #198754;
+    background-color: #205124;
 }
 .easy:hover{
     color: #ffffff !important;
@@ -78,17 +82,25 @@ h1{
 .medium{
     color: #453d00;
 }
+.medium.active{
+    color: #dac200;
+    background-color: #453d00;
+}
 .medium:hover{
     color: #ffffff !important;
     background-color: #453d00;
 }
 .hard{
     color: #5e000c;
+    border-bottom: none;
+}
+.hard.active{
+    color: #ff4b63;
+    background-color: #5e000c;
 }
 .hard:hover{
     color: #ffffff !important;
     background-color: #5e000c;
-    border-bottom: none;
 }
 #game-container > div:not(.playing){
     display: grid;
